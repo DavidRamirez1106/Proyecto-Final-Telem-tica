@@ -8,7 +8,7 @@ openssl req -x509 -nodes -days 365 \
   -newkey rsa:2048 \
   -keyout certs/privkey.pem \
   -out certs/fullchain.pem \
-  -subj "/C=CO/ST=Antioquia/L=Medellin/O=EAFIT/OU=Internet/CN=tudominio.com"
+  -subj "/C=CO/ST=Antioquia/L=Medellin/O=EAFIT/OU=Internet/CN=eafitregistro.duckdns.org"
 
 echo ""
 echo "✅  Certificado auto-firmado generado en ./certs/"

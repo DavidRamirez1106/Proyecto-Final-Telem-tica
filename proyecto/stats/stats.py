@@ -228,8 +228,8 @@ def web_dashboard(rows, img_barras, img_pie, img_linea):
     import base64
     from http.server import BaseHTTPRequestHandler, HTTPServer
 
-    b64_bar  = base64.b64encode(img_barras).decode()
-    b64_pie  = base64.b64encode(img_pie).decode()
+    b64_bar  = base64.b64encode(img_barras).decode() if img_barras else ""
+    b64_pie  = base64.b64encode(img_pie).decode() if img_pie else ""
     b64_lin  = base64.b64encode(img_linea).decode() if img_linea else ""
     tabla    = build_html_table(rows)
     ahora    = datetime.now().strftime("%Y-%m-%d %H:%M")
@@ -295,7 +295,10 @@ if __name__ == "__main__":
     img_linea  = fig_linea_tiempo()
 
     if args.web:
-        web_dashboard(rows, img_barras, img_pie, img_linea)
+        web_dashboard(rows, img_barras or b"", img_pie or b"", img_linea)
     else:
-        print("📧 Enviando correo…")
-        enviar_correo(rows, img_barras, img_pie, img_linea)
+        if not rows:
+            print("⚠️  No hay datos. No se envía correo.")
+        else:
+            print("📧 Enviando correo…")
+            enviar_correo(rows, img_barras, img_pie, img_linea)

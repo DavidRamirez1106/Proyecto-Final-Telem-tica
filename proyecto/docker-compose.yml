@@ -80,6 +80,8 @@ services:
   stats:
     build: ./stats
     container_name: stats_app
+    ports:
+      - "8080:8080"
     environment:
       - DB_HOST=db
       - DB_PORT=5432
@@ -88,13 +90,14 @@ services:
       - DB_PASSWORD=apppass123
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
-      - SMTP_USER=tucorreo@gmail.com
-      - SMTP_PASS=tupassword
+      - SMTP_USER=baronosoriojuanjose@gmail.com
+      - SMTP_PASS=ptweecqaqgwrqhcz
       - DEST_EMAIL=ialondonoo@eafit.edu.co
     depends_on:
       db:
         condition: service_healthy
     networks:
+      - frontend
       - backend
     restart: unless-stopped
 
